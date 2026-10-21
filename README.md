@@ -1,1 +1,19 @@
 # CS-305-Software-Security
+
+This repository contains my Artemis Financial Practices for Secure Software Report from Project Two, along with the refactored code base. The report documents how I added a SHA-256 checksum feature, enabled HTTPS with a self-signed certificate, and verified the application through functional and secondary security testing.
+
+Reflection
+
+Client and requirements. Artemis Financial is a consulting company that builds individualized financial plans for its customers, covering savings, retirement, investments, and insurance. The company wanted to modernize its operations by adding a file verification step to its web application, a Spring Boot RESTful API, and to make sure data moving between the server and its clients was protected. My job was to assess the existing code for vulnerabilities, recommend an appropriate encryption algorithm, and refactor the application so it met secure coding standards before it handled sensitive client data.
+
+What I did well and why secure coding matters. I was thorough in working through the code base and its dependencies, and I tied each finding back to a specific risk instead of treating the assessment as a checklist. Secure coding matters because vulnerabilities are far cheaper to prevent during development than to fix after a breach. For a financial company, software security protects customer trust, keeps the business compliant with regulations such as the Gramm-Leach-Bliley Act Safeguards Rule and PCI DSS, and avoids the financial and reputational damage that follows a data leak.
+
+Challenging or helpful parts. The most challenging part was the dependency check. The version of the OWASP Dependency-Check plugin included with the starter code relied on a retired NVD API endpoint, so I had to upgrade it in the pom.xml before the scan would run. Working through that problem was also the most helpful part, because it showed me that security tools need maintenance too and that outdated tooling can give a false sense of safety.
+
+Layering security and future assessments. I added layers of security by enabling HTTPS through a keystore and certificate generated with Java Keytool, using SHA-256 to produce checksums that verify data integrity, and reviewing third-party libraries for known CVEs. In the future I would continue to combine automated tools like OWASP Dependency-Check with manual code review, and I would use the CVE database, NIST guidance, and the OWASP Top 10 to prioritize findings by severity and choose mitigations that address the highest risks first.
+
+Ensuring functionality and security. After refactoring, I ran the application in Eclipse and confirmed the checksum endpoint returned the correct hash over HTTPS in the browser. I also wrote unit tests for the checksum logic. To check whether I had introduced new vulnerabilities, I ran the dependency check again on the refactored code and reviewed the report to confirm my changes did not add new vulnerable dependencies.
+
+Useful resources, tools, and practices. The tools I expect to keep using are OWASP Dependency-Check, Java Keytool, Maven, and the Java Security Standard Algorithm Names documentation from Oracle. Coding practices I will carry forward include validating input, keeping dependencies current, using well-established algorithms instead of custom cryptography, and testing both functionality and security after every change.
+
+What I would show employers. I would show employers the Practices for Secure Software Report and the refactored code because together they demonstrate that I can find vulnerabilities, recommend and implement industry-standard encryption, configure secure communication, and document my work clearly for a client. These are practical skills that apply to any organization that handles sensitive data.
